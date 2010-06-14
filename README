@@ -13,14 +13,21 @@ DESCRIPTION
     This cache driver uses Berkeley DB files to store data. Each namespace
     is stored in its own db file.
 
+    By default, the driver configures the Berkeley DB environment to use the
+    Concurrent Data Store (CDS), making it safe for multiple processes to
+    read and write the cache without explicit locking.
+
 CONSTRUCTOR OPTIONS
     root_dir
-        Path to the directory that will contain the database files, also
-        known as the BerkeleyDB "Home".
+        Path to the directory that will contain the Berkeley DB environment,
+        also known as the "Home".
 
-    Any other constructor options not recognized by CHI are passed along to
-    BerkeleyDB::Manager->new. For example, you can pass *db_class* to change
-    from the default BerkeleyDB::Hash.
+    db_class
+        BerkeleyDB class, defaults to BerkeleyDB::Hash.
+
+    env Use this Berkeley DB environment instead of creating one.
+
+    db  Use this Berkeley DB object instead of creating one.
 
 SUPPORT AND DOCUMENTATION
     Questions and feedback are welcome, and should be directed to the
@@ -41,7 +48,7 @@ AUTHOR
     Jonathan Swartz
 
 SEE ALSO
-    CHI, BerkeleyDB, BerkeleyDB::Manager
+    CHI, BerkeleyDB
 
 COPYRIGHT & LICENSE
     Copyright (C) 2007 Jonathan Swartz.
